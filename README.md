@@ -4,16 +4,16 @@ Examples for connecting to the MCG API taken from the API Getting Started manual
 (c) Copyright 2023 Premier Heart, LLC
 
 
-Basic API Connectivity
+###Basic API Connectivity
 
-    simple_connection.py - Tests that a connection can be made to the API server
+* simple_connection.py - Tests that a connection can be made to the API server
 ```
 bash# MCG_API_TOKEN_FILE='.token/mcg_api_jwt.dat' python simple_connection.py
 Connecting to unused endpoint. Should print 'ERROR /':
 ERROR /
 ```
 
-    error_handling.py - Demonstrates how to handle various connection errors
+* error_handling.py - Demonstrates how to handle various connection errors
 ```
 bash# MCG_API_TOKEN_FILE='.token/mcg_api_jwt.dat' python error_handling.py
 [01] Connecting to invalid server
@@ -40,7 +40,7 @@ bash# MCG_API_TOKEN_FILE='.token/mcg_api_jwt.dat' python error_handling.py
  ... Caught error: Extension not found
 ```    
 
-    basic_analysis_request.py - Demonstrates how to send an AnalysisRequest to the API server. This uses random data for the ECG inputs, which may result in an Error object being returned instead of an AnalysisResult.
+* basic_analysis_request.py - Demonstrates how to send an AnalysisRequest to the API server. This uses random data for the ECG inputs, which may result in an Error object being returned instead of an AnalysisResult.
 ```
 bash# MCG_API_TOKEN_FILE='.token/mcg_api_jwt.dat' python basic_analysis_request.py
 Analysis Results:
@@ -55,7 +55,7 @@ Analysis Results:
 	warnings: []
 ```
 
-    send_ecg_files.py - Demonstrates how to send ECG JSON files for analysis and display the results.
+* send_ecg_files.py - Demonstrates how to send ECG JSON files for analysis and display the results.
 ```
 bash# MCG_API_TOKEN_FILE='.token/mcg_api_jwt.dat' python send_ecg_files.py
 Read input: /home/ph/projects/mcg-api-examples/data/ecg_1.json
@@ -80,7 +80,7 @@ Results Summary:
 	warnings: []
 Attachments:
 ```
-    multiple_output_request.py - Demonstrates how to request multiple output files, which will be included in the AnalysisResults object as attachments.
+* multiple_output_request.py - Demonstrates how to request multiple output files, which will be included in the AnalysisResults object as attachments.
 ```
 bash# MCG_API_TOKEN_FILE='.token/mcg_api_jwt.dat' python multiple_output_request.py
 Read input: /home/ph/projects/mcg-api-examples/data/ecg_1.json
@@ -131,7 +131,7 @@ Attachments:
 	[24] transform-heatmap-cps.(V5,II) from transform-heatmap for input '0,1,2' : image/svg+xml (base64-encoded 113602-byte file)
 	[25] report from report-json for input '0,1,2' : application/x-java-object (in-memory JSON object)
 ```
-    tracing_quality_request.py - Demonstrates how to perform an ECG Tracing Quality analysis
+* tracing_quality_request.py - Demonstrates how to perform an ECG Tracing Quality analysis
 ```
 bash# MCG_API_TOKEN_FILE='.token/mcg_api_jwt.dat' python tracing_quality_request.py
 Read input: /home/ph/projects/mcg-api-examples/data/ecg_1.json
@@ -153,17 +153,17 @@ Results Summary:
 	warnings: []
 ```
 
-Analysis of API Output
-analyze_features.py
-analyze_result_diagnoses.py
-analyze_result_transforms.py
+###Analysis of API Output
+* analyze_features.py
+* analyze_result_diagnoses.py
+* analyze_result_transforms.py
 
-Advanced Analysis Types
-differential_analysis_request.py
-diagnosis_trace.py
+###Advanced Analysis Types
+* differential_analysis_request.py
+* diagnosis_trace.py
 
-Displaying API output
-extract-transform-heatmaps.py
-transform_heatmap_output.py
-transform_topo_plot.py
-generate_pdf_report.py
+###Displaying API output
+* extract-transform-heatmaps.py
+* transform_heatmap_output.py
+* transform_topo_plot.py
+* generate_pdf_report.py
