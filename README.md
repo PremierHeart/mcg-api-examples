@@ -4,7 +4,7 @@ Examples for connecting to the MCG API taken from the API Getting Started manual
 (c) Copyright 2023 Premier Heart, LLC
 
 
-###Basic API Connectivity
+### Basic API Connectivity
 
 * simple_connection.py - Tests that a connection can be made to the API server
 ```
@@ -153,16 +153,16 @@ Results Summary:
 	warnings: []
 ```
 
-###Analysis of API Output
+### Analysis of API Output
 * analyze_features.py
 * analyze_result_diagnoses.py
 * analyze_result_transforms.py
 
-###Advanced Analysis Types
+### Advanced Analysis Types
 * differential_analysis_request.py
 * diagnosis_trace.py
 
-###Displaying API output
+### Displaying API output
 * extract-transform-heatmaps.py
 * transform_heatmap_output.py
 * transform_topo_plot.py
