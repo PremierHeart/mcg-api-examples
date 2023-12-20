@@ -154,9 +154,79 @@ Results Summary:
 ```
 
 ### Analysis of API Output
-* analyze_features.py
+These programs take an AnalysisResults JSON file as in put. In the following examples, the automatically-saved output of multiple_output_request.py has been used.
+
 * analyze_result_diagnoses.py
+```
+bash# python analyze_result_diagnoses.py data/analysis-results.multiple-outputs.example.json
+DIAGNOSIS MATRIX:
+  id Impression (text) Ischemia  Disease Severity  Ischemic Disease Severity  \
+0  0          Abnormal                        6.5                        0.0   
+1  1          Abnormal                        6.5                        0.0   
+2  2          Abnormal                        6.5                        0.0   
+/* ... OMITTED ... */
+INPUT 0
+        (mcg-pre) MCG Preliminary Analysis Algorithm
+                - (HR) Heart Rate : 65
+                + (rA) Ventricular Hypertrophy (raw) : 0.16
+                + (A) Ventricular Hypertrophy : 0.16
+                + (rC) Ischemia (raw) : 0.18
+                + (C) Ischemia : 0.21
+/* ... OMITTED ... */
+				 MCG Ischemia Analysis
+   CAD1  CAD2  CAD3  CAD4  CAD5  CAD6  CAD7  CAD8  CAD9  CAD10  CAD11  CAD12  \
+0     1     0     0     0     0     0     0     0     0      0      0      0
+1     1     0     0     0     0     0     0     0     0      0      0      0
+2     1     0     0     0     0     0     0     0     0      0      0      0
+
+   CAD13  CAD14  NCI1  NCI2  NCI3  NCI4  NCI5  NCI6  NCI7  NCI8  NCI9  NCI10  \
+0      0      0     0     0     0     0     0     0     0     0     0      0
+1      0      0     0     0     0     0     0     0     0     0     0      0
+2      0      0     0     0     0     0     0     0     0     0     0      0
+
+   NCI11  NCI12  NCI13  NCI14  NCI15  NCI  CAD  C
+0      0      0      0      0      0    0    1  1
+1      0      0      0      0      0    0    1  1
+2      0      0      0      0      0    0    1  1
+       CAD1  CAD2  CAD3  CAD4  CAD5  CAD6  CAD7  CAD8  CAD9  CAD10  CAD11  \
+count   3.0   3.0   3.0   3.0   3.0   3.0   3.0   3.0   3.0    3.0    3.0
+mean    1.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0    0.0    0.0
+std     0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0    0.0    0.0
+min     1.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0    0.0    0.0
+25%     1.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0    0.0    0.0
+50%     1.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0    0.0    0.0
+75%     1.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0    0.0    0.0
+max     1.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0    0.0    0.0
+
+       CAD12  CAD13  CAD14  NCI1  NCI2  NCI3  NCI4  NCI5  NCI6  NCI7  NCI8  \
+count    3.0    3.0    3.0   3.0   3.0   3.0   3.0   3.0   3.0   3.0   3.0
+mean     0.0    0.0    0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
+std      0.0    0.0    0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
+min      0.0    0.0    0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
+25%      0.0    0.0    0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
+50%      0.0    0.0    0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
+75%      0.0    0.0    0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
+max      0.0    0.0    0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
+
+       NCI9  NCI10  NCI11  NCI12  NCI13  NCI14  NCI15  NCI  CAD    C
+count   3.0    3.0    3.0    3.0    3.0    3.0    3.0  3.0  3.0  3.0
+mean    0.0    0.0    0.0    0.0    0.0    0.0    0.0  0.0  1.0  1.0
+std     0.0    0.0    0.0    0.0    0.0    0.0    0.0  0.0  0.0  0.0
+min     0.0    0.0    0.0    0.0    0.0    0.0    0.0  0.0  1.0  1.0
+25%     0.0    0.0    0.0    0.0    0.0    0.0    0.0  0.0  1.0  1.0
+50%     0.0    0.0    0.0    0.0    0.0    0.0    0.0  0.0  1.0  1.0
+75%     0.0    0.0    0.0    0.0    0.0    0.0    0.0  0.0  1.0  1.0
+max     0.0    0.0    0.0    0.0    0.0    0.0    0.0  0.0  1.0  1.0
+MCG Disease Severity Analysis
+/* ... OMITTED ... */
+```
+![Diagnosis Matrix histogram](images/diagnosis-matrix-df-histogram.png?raw=true "Diagnosis Matrix histogram")
+![Ischemia Algorithm histogram](images/ischemia-df-histogram.png?raw=true "Ischemia histogram")
+
 * analyze_result_transforms.py
+```
+bash#
+```
 
 ### Advanced Analysis Types
 * differential_analysis_request.py
