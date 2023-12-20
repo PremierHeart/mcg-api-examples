@@ -300,7 +300,13 @@ Plotting coh.(V5,II). Press Ctrl-w to close.
 Example Topo Plot : Coherence
 ![Coherence topo](images/coherence-topo_plot.png?raw=true "Coherence topo")
 
-* generate_pdf_report.py
+* generate_pdf_report.py - Demonstrates generating a simple PDF report from the Diagnosis Matrix and the **report-json** output extension.
+```
+bash# python generate_pdf_report.py  data/analysis-results.multiple-outputs.example.json 
+```
+Example PDF report : First page
+![PDF Report](images/mcg-pdf-report-page-1.png?raw=true "PDF Report")
+
 
 ### Advanced Analysis Types
 * differential_analysis_request.py
