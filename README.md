@@ -295,6 +295,7 @@ Plotting coh.(V5,II). Press Ctrl-w to close.
 ```
 Example heatmap : Coherence
 ![Coherence heatmap](images/coherence-heatmap.png?raw=true "Coherence heatmap")
+Note that the colormap in matplotlib differs slighty from that used by the server to generate the SVG. The Matplotlib version is considered more canonical.
 * transform_topo_plot.py
 ```
 bash# python transform_topo_plot.py data/analysis-results.multiple-outputs.example.json 
