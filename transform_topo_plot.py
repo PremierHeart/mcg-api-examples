@@ -305,7 +305,7 @@ if __name__ == '__main__':
     dsp_row_group = []
     for att in get_transform_attachments(res):
         dsp_row_name.append(att['input'])
-        dsp_row_name.append(att['group'])
+        dsp_row_group.append(att['group'])
         for k in att['data'].keys():
             if k.startswith('json') or k == 'timestamp':
                 continue
