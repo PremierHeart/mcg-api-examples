@@ -251,8 +251,6 @@ def plot_topo(data, name, group, op, metadata, width=default_width, height=defau
     ax.yaxis.set_ticks(list(plot_data['group_ticks'].values()))
     ax.yaxis.set_ticklabels(group_labels, rotation=-15, verticalalignment='baseline', horizontalalignment='left')
 
-    if perspective: ax.view_init(perspective)
-
     # ----------------------------------------------------------------------
     # CONTOUR
     ax = fig.add_subplot(122)
