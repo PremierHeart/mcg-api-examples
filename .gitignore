@@ -3,4 +3,13 @@ analysis-results.ecg-files.example.in-place-json.json
 analysis-results.ecg-files.example.json
 analysis-results.ecg-files.tracing-quality.json
 analysis-results.multiple-outputs.example.json
-
+transform-heatmap-amp.II.svg
+transform-heatmap-amp.V5.svg
+transform-heatmap-aps.II.svg
+transform-heatmap-aps.V5.svg
+transform-heatmap-ccr.(V5,II).svg
+transform-heatmap-cps.(V5,II).svg
+transform-heatmap-imr.(V5,II).svg
+transform-heatmap-psa.(V5,II).svg
+transform-heatmap-xar.(V5,II).svg
+transform-heatmap-coh.(V5,II).svg
