@@ -279,10 +279,22 @@ Done.
 Example heatmap : Coherence
 ![Coherence heatmap](images/coherence-heatmap.svg?raw=true "Coherence heatmap")
 
-* transform_heatmap_output.py
+* transform_heatmap_output.py - Demonstrates generating the transform heatmaps locally, using matplotlib.
 ```
 bash# python extract-transform-heataps.py data/analysis-results.multiple-outputs.example.json 
+Plotting aps.V5. Press Ctrl-w to close.
+Plotting aps.II. Press Ctrl-w to close.
+Plotting amp.V5. Press Ctrl-w to close.
+Plotting amp.II. Press Ctrl-w to close.
+Plotting cps.(V5,II). Press Ctrl-w to close.
+Plotting ccr.(V5,II). Press Ctrl-w to close.
+Plotting imr.(V5,II). Press Ctrl-w to close.
+Plotting psa.(V5,II). Press Ctrl-w to close.
+Plotting xar.(V5,II). Press Ctrl-w to close.
+Plotting coh.(V5,II). Press Ctrl-w to close.
 ```
+Example heatmap : Coherence
+![Coherence heatmap](images/coherence-heatmap.png?raw=true "Coherence heatmap")
 * transform_topo_plot.py
 ```
 bash# python transform_topo_plot.py data/analysis-results.multiple-outputs.example.json 
