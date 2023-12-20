@@ -298,7 +298,7 @@ Plotting xar.(V5,II). Press Ctrl-w to close.
 Plotting coh.(V5,II). Press Ctrl-w to close.
 ```
 Example Topo Plot : Coherence
-![Coherence topo](images/coherence-topo_plot.svg?raw=true "Coherence topo")
+![Coherence topo](images/coherence-topo_plot.png?raw=true "Coherence topo")
 
 * generate_pdf_report.py
 
