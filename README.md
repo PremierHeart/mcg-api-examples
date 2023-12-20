@@ -156,7 +156,7 @@ Results Summary:
 ### Analysis of API Output
 These programs take an AnalysisResults JSON file as in put. In the following examples, the automatically-saved output of multiple_output_request.py has been used.
 
-* analyze_result_diagnoses.py
+* analyze_result_diagnoses.py - This demonstrates how to load the contents of the Diagnosis Matrix and of **results-json** attachments into a Pandas dataframe. For each dataframe, a summary is printed and a histogram is plotted. Note that the contents of **results-json** are for research purposes only, and should not be interpreted without guidance from Premier Heart staff.
 ```
 bash# python analyze_result_diagnoses.py data/analysis-results.multiple-outputs.example.json
 DIAGNOSIS MATRIX:
@@ -223,9 +223,38 @@ MCG Disease Severity Analysis
 ![Diagnosis Matrix histogram](images/diagnosis-matrix-df-histogram.png?raw=true "Diagnosis Matrix histogram")
 ![Ischemia Algorithm histogram](images/ischemia-df-histogram.png?raw=true "Ischemia histogram")
 
-* analyze_result_transforms.py
+* analyze_result_transforms.py - Demonstrates how to load the contents of **transform-json** into a Pandas dataframe. As an example analysis, the Frequency Response of lead II is calculated. 
 ```
-bash#
+bash# python analyze_result_transforms.py   data/analysis-results.multiple-outputs.example.json
+(aps) auto power spectrum of Signal V5
+      frequency domain: power peaks in signal
+           0         1          2    ...       125  126       127
+count      3.0  3.000000   3.000000  ...  3.000000  3.0  3.000000
+mean   32765.0  4.000000  11.666667  ...  2.666667  2.0  1.333333
+std        0.0  2.645751   3.214550  ...  0.577350  0.0  0.577350
+min    32765.0  2.000000   8.000000  ...  2.000000  2.0  1.000000
+25%    32765.0  2.500000  10.500000  ...  2.500000  2.0  1.000000
+50%    32765.0  3.000000  13.000000  ...  3.000000  2.0  1.000000
+75%    32765.0  5.000000  13.500000  ...  3.000000  2.0  1.500000
+max    32765.0  7.000000  14.000000  ...  3.000000  2.0  2.000000
+
+[8 rows x 128 columns]
+
+(aps) auto power spectrum of Signal II
+      frequency domain: power peaks in signal
+/* ... OMITTED ... */
+Frequency Response (II):
+            0    1    2    3    ...         124   125        126  127
+count  3.000000  3.0  3.0  3.0  ...    3.000000   3.0   3.000000  3.0
+mean   2.764980  0.0  0.0  0.0  ...  326.200515  15.0   3.333333  0.0
+std    0.002138  0.0  0.0  0.0  ...   23.721900   4.0   5.773503  0.0
+min    2.762648  0.0  0.0  0.0  ...  299.130435  11.0   0.000000  0.0
+25%    2.764047  0.0  0.0  0.0  ...  317.620773  13.0   0.000000  0.0
+50%    2.765446  0.0  0.0  0.0  ...  336.111111  15.0   0.000000  0.0
+75%    2.766146  0.0  0.0  0.0  ...  339.735556  17.0   5.000000  0.0
+max    2.766847  0.0  0.0  0.0  ...  343.360000  19.0  10.000000  0.0
+
+[8 rows x 128 columns]  
 ```
 
 ### Advanced Analysis Types
