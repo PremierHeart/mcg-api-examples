@@ -93,6 +93,13 @@ def print_tracing_quality(res, indent):
     for samp, tq in res['tracing-quality'].items():
         print(indent + indent + "%s : %d" % (samp, tq))
 
+def print_diag_trace_dict(indent, h):
+    for name, obj in h.items():
+        print("%s|- %s" % (indent, name))
+        if obj and len(obj) > 0:
+            print_diag_trace_dict(indent + indent, obj)
+
+
 if __name__ == '__main__':
     url = "https://api.premierheart.com/api/v1/analyze"
     if len(sys.argv) > 1:
@@ -120,7 +127,7 @@ if __name__ == '__main__':
         sys.exit()
 
     # save to disk:
-    with open("data/analysis-results.multiple-outputs.example.json", 'w') as f:
+    with open("data/analysis-results.diagnosis-trace.example.json", 'w') as f:
         f.write(json.dumps(results))
 
     print("Results Summary:")
@@ -144,7 +151,9 @@ if __name__ == '__main__':
 
         if att['name'] == 'result-explain-sample':
             diag_trace[att['input']] = att['data']
-    print(diag_trace)
-    #{'ecg_1': {'IMPSTR': {'name': 'Impression (text)', 'backtrace': {'MCG Primary Analysis: Impression (text)'
-
-    
+    print("Diagnosis Trace:")
+    for fname, diag_h in diag_trace.items():
+        print(fname)
+        for sym, diag in diag_h.items():
+            print(" |- %s" % (diag['name']))
+            print_diag_trace_dict("    ", diag['backtrace'])
