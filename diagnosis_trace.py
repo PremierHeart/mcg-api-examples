@@ -95,9 +95,12 @@ def print_tracing_quality(res, indent):
 
 def print_diag_trace_dict(indent, h):
     for name, obj in h.items():
-        print("%s|- %s" % (indent, name))
-        if obj and len(obj) > 0:
-            print_diag_trace_dict(indent + indent, obj)
+        if isinstance(obj, dict):
+            print("%s|- %s" % (indent, name))
+            if len(obj) > 0:
+                print_diag_trace_dict(indent + indent, obj)
+        elif isinstance(obj, float):
+            print("%s|- %s (%0.1f)" % (indent, name, obj))
 
 
 if __name__ == '__main__':

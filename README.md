@@ -397,9 +397,7 @@ Example Differential Diagnosis Plot
 
 * diagnosis_trace.py - Shows how to display the tree of a Diagnosis Trace 
 output. The Diagnosis Trace is used to determine how a particular result was 
-arrived at by the analysis software. This initial version is for demonstration
-purposes only; more information must be added to the output in order to
-be as useful as the Premier Heart internal utility.
+arrived at by the analysis software. 
 ```
 bash# MCG_API_TOKEN_FILE='.token/mcg_api_jwt.dat' python diagnosis_trace.py
 Read input: /home/ph/projects/mcg-api-examples/data/ecg_1.json
@@ -468,17 +466,36 @@ ecg_1
         |- MCG Impression Analysis: Impression (text)
                 |- MCG Impression Analysis: Impression
                                 |- MCG Impression Analysis: Abnormal
+                                                                |- auto power spectrum V5: A5 (10.0)
+                                                                |- phase shift angle : P+ (10.0)
+                                                                |- phase shift angle : P- (10.0)
+                                                                |- phase shift angle : WW (10.0)
  |- Disease Severity
     |- MCG Primary Analysis: Disease Severity
         |- MCG Disease Severity Analysis: Disease Severity Score
+                |- impulse response (V5,II): Bat1 (1.0)
+                |- cross correlation (V5,II): Snail1 (1.0)
+                |- phase shift angle (V5,II): Dragon1 (1.0)
+                |- auto power spectrum II: Camel1 (1.0)
  |- Disease Severity Adjusted Score
     |- MCG Primary Analysis: Disease Severity Adjusted Score
         |- MCG Disease Severity Analysis: Disease Severity Adjusted Score
+                |- auto power spectrum II: Camel1 (1.0)
+                |- cross correlation (V5,II): Snail1a (1.0)
+                |- cross correlation (V5,II): Snail1b (1.0)
+                |- cross correlation (V5,II): Snail1c (1.0)
+                |- impulse response (V5,II): Bat1a (1.0)
+                |- impulse response (V5,II): Bat1b (1.0)
+                |- phase shift angle (V5,II): Dragon1a (1.0)
+                |- phase shift angle (V5,II): Dragon1b (1.0)
  |- Myocardial Infarct
     |- MCG Secondary Analysis: Myocardial Infarct
+        |- phase shift angle (V5,II): WW (1.0)
+        |- cross correlation (V5,II): Rn (1.0)
         |- MCG Preliminary Analysis: Myocardial Infarct
  |- Ventricular Hypertrophy
     |- MCG Secondary Analysis: Ventricular Hypertrophy
+        |- auto power spectrum V5: A5 (1.0)
         |- MCG Preliminary Analysis: Ventricular Hypertrophy
         |- MCG Secondary Analysis: Left Ventricular Hypertrophy
  |- Left Ventricular Hypertrophy
@@ -494,12 +511,20 @@ ecg_1
         |- MCG Preliminary Analysis: Myocarditis
  |- Myocardial Remodelling
     |- MCG Tertiary Analysis: Myocardial Remodelling
+        |- auto power spectrum V5: A5 (1.0)
+        |- phase shift angle (V5,II): P+ (1.0)
+        |- phase shift angle (V5,II): P- (1.0)
+        |- phase shift angle (V5,II): WW (1.0)
+        |- impulse response (V5,II): M3 (1.0)
  |- Increased Myocardial Compliance
     |- MCG Tertiary Analysis: Increased Myocardial Compliance
+        |- impulse response (V5,II): M3 (1.0)
  |- Signal B lags behind signal A (global)
     |- MCG Tertiary Analysis: Signal B lags behind signal A (global)
  |- Global Asynchrony
     |- MCG Tertiary Analysis: Global Asynchrony
+        |- phase shift angle : P- (1.0)
+        |- phase shift angle : P+ (1.0)
         |- MCG Tertiary Analysis: Signal B lags behind signal A (global)
 ecg_2
  |- Impression (text)
@@ -507,17 +532,36 @@ ecg_2
         |- MCG Impression Analysis: Impression (text)
                 |- MCG Impression Analysis: Impression
                                 |- MCG Impression Analysis: Abnormal
+                                                                |- auto power spectrum V5: A5 (10.0)
+                                                                |- phase shift angle : P+ (10.0)
+                                                                |- phase shift angle : P- (10.0)
+                                                                |- phase shift angle : WW (10.0)
  |- Disease Severity
     |- MCG Primary Analysis: Disease Severity
         |- MCG Disease Severity Analysis: Disease Severity Score
+                |- impulse response (V5,II): Bat1 (1.0)
+                |- cross correlation (V5,II): Snail1 (1.0)
+                |- phase shift angle (V5,II): Dragon1 (1.0)
+                |- auto power spectrum II: Camel1 (1.0)
  |- Disease Severity Adjusted Score
     |- MCG Primary Analysis: Disease Severity Adjusted Score
         |- MCG Disease Severity Analysis: Disease Severity Adjusted Score
+                |- auto power spectrum II: Camel1 (1.0)
+                |- cross correlation (V5,II): Snail1a (1.0)
+                |- cross correlation (V5,II): Snail1b (1.0)
+                |- cross correlation (V5,II): Snail1c (1.0)
+                |- impulse response (V5,II): Bat1a (1.0)
+                |- impulse response (V5,II): Bat1b (1.0)
+                |- phase shift angle (V5,II): Dragon1a (1.0)
+                |- phase shift angle (V5,II): Dragon1b (1.0)
  |- Myocardial Infarct
     |- MCG Secondary Analysis: Myocardial Infarct
+        |- phase shift angle (V5,II): WW (1.0)
+        |- cross correlation (V5,II): Rn (1.0)
         |- MCG Preliminary Analysis: Myocardial Infarct
  |- Ventricular Hypertrophy
     |- MCG Secondary Analysis: Ventricular Hypertrophy
+        |- auto power spectrum V5: A5 (1.0)
         |- MCG Preliminary Analysis: Ventricular Hypertrophy
         |- MCG Secondary Analysis: Left Ventricular Hypertrophy
  |- Left Ventricular Hypertrophy
@@ -533,12 +577,20 @@ ecg_2
         |- MCG Preliminary Analysis: Myocarditis
  |- Myocardial Remodelling
     |- MCG Tertiary Analysis: Myocardial Remodelling
+        |- auto power spectrum V5: A5 (1.0)
+        |- phase shift angle (V5,II): P+ (1.0)
+        |- phase shift angle (V5,II): P- (1.0)
+        |- phase shift angle (V5,II): WW (1.0)
+        |- impulse response (V5,II): M3 (1.0)
  |- Increased Myocardial Compliance
     |- MCG Tertiary Analysis: Increased Myocardial Compliance
+        |- impulse response (V5,II): M3 (1.0)
  |- Signal B lags behind signal A (global)
     |- MCG Tertiary Analysis: Signal B lags behind signal A (global)
  |- Global Asynchrony
     |- MCG Tertiary Analysis: Global Asynchrony
+        |- phase shift angle : P- (1.0)
+        |- phase shift angle : P+ (1.0)
         |- MCG Tertiary Analysis: Signal B lags behind signal A (global)
 ecg_3
  |- Impression (text)
@@ -546,17 +598,36 @@ ecg_3
         |- MCG Impression Analysis: Impression (text)
                 |- MCG Impression Analysis: Impression
                                 |- MCG Impression Analysis: Abnormal
+                                                                |- auto power spectrum V5: A5 (10.0)
+                                                                |- phase shift angle : P+ (10.0)
+                                                                |- phase shift angle : P- (10.0)
+                                                                |- phase shift angle : WW (10.0)
  |- Disease Severity
     |- MCG Primary Analysis: Disease Severity
         |- MCG Disease Severity Analysis: Disease Severity Score
+                |- impulse response (V5,II): Bat1 (1.0)
+                |- cross correlation (V5,II): Snail1 (1.0)
+                |- phase shift angle (V5,II): Dragon1 (1.0)
+                |- auto power spectrum II: Camel1 (1.0)
  |- Disease Severity Adjusted Score
     |- MCG Primary Analysis: Disease Severity Adjusted Score
         |- MCG Disease Severity Analysis: Disease Severity Adjusted Score
+                |- auto power spectrum II: Camel1 (1.0)
+                |- cross correlation (V5,II): Snail1a (1.0)
+                |- cross correlation (V5,II): Snail1b (1.0)
+                |- cross correlation (V5,II): Snail1c (1.0)
+                |- impulse response (V5,II): Bat1a (1.0)
+                |- impulse response (V5,II): Bat1b (1.0)
+                |- phase shift angle (V5,II): Dragon1a (1.0)
+                |- phase shift angle (V5,II): Dragon1b (1.0)
  |- Myocardial Infarct
     |- MCG Secondary Analysis: Myocardial Infarct
+        |- phase shift angle (V5,II): WW (1.0)
+        |- cross correlation (V5,II): Rn (1.0)
         |- MCG Preliminary Analysis: Myocardial Infarct
  |- Ventricular Hypertrophy
     |- MCG Secondary Analysis: Ventricular Hypertrophy
+        |- auto power spectrum V5: A5 (1.0)
         |- MCG Preliminary Analysis: Ventricular Hypertrophy
         |- MCG Secondary Analysis: Left Ventricular Hypertrophy
  |- Left Ventricular Hypertrophy
@@ -572,11 +643,19 @@ ecg_3
         |- MCG Preliminary Analysis: Myocarditis
  |- Myocardial Remodelling
     |- MCG Tertiary Analysis: Myocardial Remodelling
+        |- auto power spectrum V5: A5 (1.0)
+        |- phase shift angle (V5,II): P+ (1.0)
+        |- phase shift angle (V5,II): P- (1.0)
+        |- phase shift angle (V5,II): WW (1.0)
+        |- impulse response (V5,II): M3 (1.0)
  |- Increased Myocardial Compliance
     |- MCG Tertiary Analysis: Increased Myocardial Compliance
+        |- impulse response (V5,II): M3 (1.0)
  |- Signal B lags behind signal A (global)
     |- MCG Tertiary Analysis: Signal B lags behind signal A (global)
  |- Global Asynchrony
     |- MCG Tertiary Analysis: Global Asynchrony
+        |- phase shift angle : P- (1.0)
+        |- phase shift angle : P+ (1.0)
         |- MCG Tertiary Analysis: Signal B lags behind signal A (global)
-```
+
