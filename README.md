@@ -322,7 +322,11 @@ Example PDF report : First page
 
 
 ### Advanced Analysis Types
-* differential_analysis_request.py
+These analyses are considered experimental, and their implementation may change.
+* differential_analysis_request.py - Demonstrates how to request a differential
+diagnosis analysis (e.g. pre/post-treatment), and plot the results. Note that
+the standard MCG Analysis outputs for transforms and results are available as 
+attachments.
 ```
 bash# MCG_API_TOKEN_FILE='.token/mcg_api_jwt.dat' python differential_analysis_request.py
 Read input: /home/ph/projects/mcg-api-examples/data/ecg_pre_1.json
@@ -354,12 +358,48 @@ Results Summary:
 Attachments:
 	[0] result-diff-csv from result-diff-csv for input 'ecg_pre_1,ecg_pre_2,ecg_pre_3,ecg_pre_4,ecg_pre_5,ecg_post_1,ecg_post_2,ecg_post_3' : text/csv
 	[1] result-differential from result-json for input '' : application/x-java-object
+	[2] result-group from result-json for input 'pre' : application/x-java-object
+	[3] result-sample from result-json for input 'ecg_pre_1' : application/x-java-object
+	[4] result-sample from result-json for input 'ecg_pre_2' : application/x-java-object
+	[5] result-sample from result-json for input 'ecg_pre_3' : application/x-java-object
+	[6] result-sample from result-json for input 'ecg_pre_4' : application/x-java-object
+	[7] result-sample from result-json for input 'ecg_pre_5' : application/x-java-object
+	[8] result-group from result-json for input 'post' : application/x-java-object
+	[9] result-sample from result-json for input 'ecg_post_1' : application/x-java-object
+	[10] result-sample from result-json for input 'ecg_post_2' : application/x-java-object
+	[11] result-sample from result-json for input 'ecg_post_3' : application/x-java-object
+	[12] transform-heatmap-amp.V5 from transform-heatmap for input 'ecg_pre_1,ecg_pre_2,ecg_pre_3,ecg_pre_4,ecg_pre_5,ecg_post_1,ecg_post_2,ecg_post_3' : image/svg+xml
+	[13] transform-heatmap-amp.II from transform-heatmap for input 'ecg_pre_1,ecg_pre_2,ecg_pre_3,ecg_pre_4,ecg_pre_5,ecg_post_1,ecg_post_2,ecg_post_3' : image/svg+xml
+	[14] transform-heatmap-aps.V5 from transform-heatmap for input 'ecg_pre_1,ecg_pre_2,ecg_pre_3,ecg_pre_4,ecg_pre_5,ecg_post_1,ecg_post_2,ecg_post_3' : image/svg+xml
+	[15] transform-heatmap-aps.II from transform-heatmap for input 'ecg_pre_1,ecg_pre_2,ecg_pre_3,ecg_pre_4,ecg_pre_5,ecg_post_1,ecg_post_2,ecg_post_3' : image/svg+xml
+	[16] transform-heatmap-ccr.(V5,II) from transform-heatmap for input 'ecg_pre_1,ecg_pre_2,ecg_pre_3,ecg_pre_4,ecg_pre_5,ecg_post_1,ecg_post_2,ecg_post_3' : image/svg+xml
+	[17] transform-heatmap-coh.(V5,II) from transform-heatmap for input 'ecg_pre_1,ecg_pre_2,ecg_pre_3,ecg_pre_4,ecg_pre_5,ecg_post_1,ecg_post_2,ecg_post_3' : image/svg+xml
+	[18] transform-heatmap-imr.(V5,II) from transform-heatmap for input 'ecg_pre_1,ecg_pre_2,ecg_pre_3,ecg_pre_4,ecg_pre_5,ecg_post_1,ecg_post_2,ecg_post_3' : image/svg+xml
+	[19] transform-heatmap-psa.(V5,II) from transform-heatmap for input 'ecg_pre_1,ecg_pre_2,ecg_pre_3,ecg_pre_4,ecg_pre_5,ecg_post_1,ecg_post_2,ecg_post_3' : image/svg+xml
+	[20] transform-heatmap-xar.(V5,II) from transform-heatmap for input 'ecg_pre_1,ecg_pre_2,ecg_pre_3,ecg_pre_4,ecg_pre_5,ecg_post_1,ecg_post_2,ecg_post_3' : image/svg+xml
+	[21] transform-heatmap-cps.(V5,II) from transform-heatmap for input 'ecg_pre_1,ecg_pre_2,ecg_pre_3,ecg_pre_4,ecg_pre_5,ecg_post_1,ecg_post_2,ecg_post_3' : image/svg+xml
+	[22] transform-sample from transform-json for input 'ecg_pre_1' : application/x-java-object
+	[23] transform-sample from transform-json for input 'ecg_pre_2' : application/x-java-object
+	[24] transform-sample from transform-json for input 'ecg_pre_3' : application/x-java-object
+	[25] transform-sample from transform-json for input 'ecg_pre_4' : application/x-java-object
+	[26] transform-sample from transform-json for input 'ecg_pre_5' : application/x-java-object
+	[27] transform-sample from transform-json for input 'ecg_post_1' : application/x-java-object
+	[28] transform-sample from transform-json for input 'ecg_post_2' : application/x-java-object
+	[29] transform-sample from transform-json for input 'ecg_post_3' : application/x-java-object
+Diff:
+groups|inputs|operation|Atrial Fibrillation|Biventricular Hypertrophy|Bradycardia|Cardio Myopathy|Congenital HD|Decreased Myocardial Compliance|Disease Severity|Disease Severity Adjusted Score|Ejection Fraction|Fibrillation|Global Asynchrony|Global Ischemia|Global Ischemia (borderline)|Impression (text)|Incipient Arrhythmia|Increased Myocardial Compliance|Ischemia|Ischemic Disease Severity|Left Ventricular Hypertrophy|Local Asynchrony|Local Ischemia|Local Ischemia (borderline)|Myocardial Infarct|Myocardial Remodelling|Myocarditis|Potential Fibrillation|Power Failure|Pulmonary HD|Rheumatic HD|Right Ventricular Hypertrophy|Signal A lags behind signal B (global)|Signal A lags behind signal B (local)|Signal B lags behind signal A (global)|Signal B lags behind signal A (local)|Tachycardia|Ventricular Arrhythmia|Ventricular Fibrillation|Ventricular Hypertrophy
+pre||I|-|-|-|+|X|X|+|+|X|X|+|X|-|+|X|X|X|+|-|-|X|-|+|+|+|-|-|-|X|-|+|-|-|-|-|X|X|-
+post||I|X|X|X|-|-|-|+|+|-|+|-|-|-|+|X|X|X|X|-|-|X|-|+|+|+|X|-|X|X|X|-|-|-|-|-|-|-|+
 /* ... OMITTED ... */
 ```
 Example Differential Diagnosis Plot
 ![Differential Diagnosis](images/differential-diagnosis-plot.png?raw=true "Differential Diagnosis")
 
-* diagnosis_trace.py
+* diagnosis_trace.py - Shows how to display the tree of a Diagnosis Trace 
+output. The Diagnosis Trace is used to determine how a particular result was 
+arrived at by the analysis software. This initial version is for demonstration
+purposes only; more information must be added to the output in order to
+be as useful as the Premier Heart internal utility.
 ```
 bash# MCG_API_TOKEN_FILE='.token/mcg_api_jwt.dat' python diagnosis_trace.py
 Read input: /home/ph/projects/mcg-api-examples/data/ecg_1.json
