@@ -1,4 +1,6 @@
-analysis-results.ecg-files.example.encoded-json.json 
+analysis-results.diagnosis-trace.example.json
+analysis-results.differential.example.json
+analysis-results.ecg-files.example.encoded-json.json
 analysis-results.ecg-files.example.in-place-json.json
 analysis-results.ecg-files.example.json
 analysis-results.ecg-files.tracing-quality.json

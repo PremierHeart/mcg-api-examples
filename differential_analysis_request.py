@@ -2,14 +2,16 @@
 # (c) Copyright 2023 Premier Heart, LLC
 
 import base64
-import json
-import requests
 import io
+import json
+import math
 import os
 import random
+import requests
 import sys
 from datetime import datetime
 import pandas as pd
+import matplotlib.pyplot as plt
 
 TOKEN_PATH_KEY = 'MCG_API_TOKEN_FILE'
 TOKEN_KEY = 'MCG_API_TOKEN'
@@ -87,7 +89,103 @@ def print_results_summary(res, indent="\t"):
         for lead, h in lead_stats.items():
             print(indent + indent + indent + "%s  Count: %d  High: %d  Low: %d  Baseline: %d  Total: %d  Peak Count: %d  Voltage: %0.2f  PPV: %d" % (lead, h['count'], h['high'], h['low'], h['baseline'], h['total'], h['peak_count'], h['voltage'], h['ppv']))
 
+# ----------------------------------------------------------------------
+# DIFFERENTIAL PLOT
+default_dpi = 100
+default_height = 768
+default_width = 1024+1024
 
+def plot_rows(ax, orig_df, diag_labels):
+    df = orig_df.iloc[:,3:]
+    x_labels = []
+    y_labels = []
+    pos_x = [ ]
+    pos_y = [ ]
+    neg_x = [ ]
+    neg_y = [ ]
+    unstable_x = [ ]
+    unstable_y = [ ]
+
+    # diagnosis is Y axis
+    for y, y_name in enumerate(df.columns):
+        y_labels.append(y_name)
+        # input is X axis
+        for x_idx, row in df.iterrows():
+            x_name = orig_df.inputs[x_idx]
+            if isinstance(x_name, float):
+                if math.isnan(x_name):
+                    x_name = orig_df.groups[x_idx]
+                else:
+                    x_name = str(x_name) # actually an error
+            if x_name not in x_labels:
+                    x_labels.append(x_name)
+            x = x_labels.index(x_name)
+
+            # scatter plot point is either red X, Green +, or Blue -
+            if row[y_name] == '+':
+                pos_x.append(x)
+                pos_y.append(y)
+            elif row[y_name] == '-':
+                neg_x.append(x)
+                neg_y.append(y)
+            else: # df.loc(idx, y) == 'X'
+                unstable_x.append(x)
+                unstable_y.append(y)
+
+    ax.scatter(pos_x, pos_y, c='green', marker='P')
+    ax.scatter(neg_x, neg_y, c='red', marker='_', s=100)
+    ax.scatter(unstable_x, unstable_y, c='grey', marker='x')
+    ax.grid(True, zorder=5, linestyle='dotted')
+
+    ax.yaxis.set_ticks(list(range(len(y_labels))))
+    if diag_labels:
+        ax.set_yticklabels(y_labels, fontsize=8)  
+    else:
+        ax.set_yticklabels([])  
+
+    ax.xaxis.set_ticks(list(range(len(x_labels))))
+    ax.set_xticklabels(x_labels, rotation=315, ha='left', fontsize=6)  
+
+def plot_differential(df,width=default_width, height=default_height, dpi=default_dpi):
+    # NOTE: first five rows are comparison of both groups
+
+    fig = plt.figure(figsize=[width/dpi, height/dpi], dpi=dpi)
+    axes = fig.subplots(1, 4, width_ratios=[1, 3, 3, 3])
+
+    # should be only two rows
+    rows = df.loc[ df['operation'] == 'I']
+    print(rows['operation'])
+    ax = axes[0]
+    ax.title.set_text("Identity operation" )
+    plot_rows(ax, rows, True)
+
+    rows = df.loc[ df.operation.str.match(r"^A[0-9]*\^B[0-9]*")]
+    print(rows['operation'])
+    ax = axes[1]
+    ax.title.set_text("Intersection (items in both B and A)")
+    plot_rows(ax, rows, False)
+
+    rows = df.loc[ df.operation.str.match(r"^A[0-9]*\-B[0-9]*")]
+    print(rows['operation'])
+    ax = axes[2]
+    ax.title.set_text("Difference (items in A not in B)" )
+    plot_rows(ax, rows, False)
+
+    rows = df.loc[ df.operation.str.match(r"^B[0-9]*\-A[0-9]*")]
+    print(rows['operation'])
+    ax = axes[3]
+    ax.title.set_text("Difference (items in B not in A)" )
+    plot_rows(ax, rows, True)
+    ax.yaxis.set_label_position("right")
+    ax.yaxis.tick_right()
+
+    fig.suptitle('MCG Diagnosis : Differential Analysis')
+    fig.tight_layout()
+    plt.show()
+    plt.close()
+
+# ----------------------------------------------------------------------
+# MAIN
 if __name__ == '__main__':
     url = "https://api.premierheart.com/api/v1/analyze"
     if len(sys.argv) > 1:
@@ -123,7 +221,7 @@ if __name__ == '__main__':
         sys.exit()
 
     # save to disk:
-    with open("analysis-results.ecg-files.example.json", 'w') as f:
+    with open("data/analysis-results.differential.example.json", 'w') as f:
         f.write(json.dumps(results))
 
     print("Results Summary:")
@@ -141,5 +239,29 @@ if __name__ == '__main__':
 
     print("Diff:")
     print(results_diff)
-    print("Diff dataframe summary:")
     df = pd.read_csv(io.StringIO(results_diff), sep="|")
+    plot_differential(df)
+
+"""
+The result-diff-csv attachment has a header line which defines the columns, followed by one line for every row of data. Each row of data represents a comparison of the inputs. The groups column specifies whether the results are obtained from a single group (A or B), or from performing an operation on two groups (A*B). The inputs column specifies which items (input sample) within the group(s) are being compared; if empty, all items are compared. The operation column specifies which operations was performed. This is one of the following:
+
+• I : Identity operation.
+
+• A^B : Intersection, items in both B and A.
+
+• A-B : Difference, items in A not in B. 
+
+• B-A : Difference, items in B not in A. 
+
+The remaining columns refer to diagnoses, and contain either +, -, or X, which generally means that the diagnosis is always positive (+), always negative (-), or is unstable (X), i.e. varying between positive and negative.
+
+The first five rows look like this: 
+
+A||I|X|-|-|X|-|X|+|+|-|X|-|-|-|+|+|+|+|X|-|-|X|X|X|+|X|-|-|-|-|X|-|-|-|-|-|-|-|X
+
+Rows 1 and 2 determine the per-group stability of each diagnosis. In this example, the first diagnosis column (Atrial Fibrillation) is unstable amon the samples in group A, and also in group B. The second and third diagnosis column (Biventricular Hypertrophy and Bradycardia) are negative in all samples in groiup B, and also in group B. The sixth column (Disease Severity) is unstable (X) among samples in group A (meaning the disease severity diagnosis is positive in some but not all of those samples - note that the score itself is ignored in this comparison), but is negative (-) in all of the samples in group B. 
+
+Rows 3, 4, and 5 contain the output of intersection and difference operations using rows 1 and 2 as input. In the intersection output (row 1), Atrial Fibrillation result is unstable (X), the Biventricular Hypertrophy and Bradycardia results are negative (-), and the Disease Severity result is unstable (X). Note that unstable, in this context, means “the diagnosis is unstable in at least one group”. The inersection results therefore show that the diagnosis columns which match between the two groups are 2, 3, 5, 7, 8, 9, 11, 12, 13, 14, 15, 19, 20, 24, 26, 27, 29, 31, 32, 33, 34, 35, 36, 37. The diagnosis columns which are stable in A but not in B are 16, 17, 28, and the diagnosis columns which are stable in B but not in A are 6, 23, 30, 38.
+
+The remaining rows perform sample-to-sample comparisons, matching up each sample in group A with each sample in group B.
+"""
