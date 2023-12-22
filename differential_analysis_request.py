@@ -154,25 +154,21 @@ def plot_differential(df,width=default_width, height=default_height, dpi=default
 
     # should be only two rows
     rows = df.loc[ df['operation'] == 'I']
-    print(rows['operation'])
     ax = axes[0]
     ax.title.set_text("Identity operation" )
     plot_rows(ax, rows, True)
 
     rows = df.loc[ df.operation.str.match(r"^A[0-9]*\^B[0-9]*")]
-    print(rows['operation'])
     ax = axes[1]
     ax.title.set_text("Intersection (items in both B and A)")
     plot_rows(ax, rows, False)
 
     rows = df.loc[ df.operation.str.match(r"^A[0-9]*\-B[0-9]*")]
-    print(rows['operation'])
     ax = axes[2]
     ax.title.set_text("Difference (items in A not in B)" )
     plot_rows(ax, rows, False)
 
     rows = df.loc[ df.operation.str.match(r"^B[0-9]*\-A[0-9]*")]
-    print(rows['operation'])
     ax = axes[3]
     ax.title.set_text("Difference (items in B not in A)" )
     plot_rows(ax, rows, True)
@@ -230,6 +226,7 @@ if __name__ == '__main__':
             print_results_summary(v, "\t")
         elif k != 'attachments':
             print("\t%s: %s" % (k, str(v)))
+
     print("Attachments:")
     results_diff = ""
     for idx, att in enumerate(results['attachments']):
@@ -238,7 +235,7 @@ if __name__ == '__main__':
             results_diff = att['data']
 
     print("Diff:")
-    print(results_diff)
+    print(results_diff) # prints CSV to output
     df = pd.read_csv(io.StringIO(results_diff), sep="|")
     plot_differential(df)
 
