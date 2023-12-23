@@ -95,7 +95,7 @@ default_dpi = 100
 default_height = 768
 default_width = 1024+1024
 
-def plot_rows(ax, orig_df, diag_labels):
+def plot_rows(ax, orig_df, diag_labels, legend=False):
     df = orig_df.iloc[:,3:]
     x_labels = []
     y_labels = []
@@ -132,10 +132,12 @@ def plot_rows(ax, orig_df, diag_labels):
                 unstable_x.append(x)
                 unstable_y.append(y)
 
-    ax.scatter(pos_x, pos_y, c='green', marker='P')
-    ax.scatter(neg_x, neg_y, c='red', marker='_', s=100)
-    ax.scatter(unstable_x, unstable_y, c='grey', marker='x')
+    ax.scatter(pos_x, pos_y, c='green', marker='P', label="always positive")
+    ax.scatter(neg_x, neg_y, c='red', marker='_', s=100, label="always negative")
+    ax.scatter(unstable_x, unstable_y, c='grey', marker='x', label="unstable")
     ax.grid(True, zorder=5, linestyle='dotted')
+    if legend:
+         ax.legend(loc='upper center', fontsize=6)
 
     ax.yaxis.set_ticks(list(range(len(y_labels))))
     if diag_labels:
@@ -156,7 +158,7 @@ def plot_differential(df,width=default_width, height=default_height, dpi=default
     rows = df.loc[ df['operation'] == 'I']
     ax = axes[0]
     ax.title.set_text("Identity operation" )
-    plot_rows(ax, rows, True)
+    plot_rows(ax, rows, True, True)
 
     rows = df.loc[ df.operation.str.match(r"^A[0-9]*\^B[0-9]*")]
     ax = axes[1]
