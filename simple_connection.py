@@ -28,7 +28,7 @@ def send_api_request(server_url):
     header = { 'Authorization': token,
                'Content-Type': 'application/json' }
     data = build_data()
-    response = requests.get(url=server_url, headers=header)
+    response = requests.get(url=server_url, headers=header, json=data)
     print(response.text)
 
 if __name__ == '__main__':
