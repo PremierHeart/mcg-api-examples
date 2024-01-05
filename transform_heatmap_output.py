@@ -34,10 +34,24 @@ def plot_heatmap(op_data, name, group, op, metadata, cmap="jet", width=default_w
         delta = 1
     rows = [ [(float(y-min_y) / delta) for y in row] for row in op_data ]
 
-    im = ax.imshow(rows, cmap=cmap, interpolation='nearest',
+    im = ax.imshow(list(reversed(rows)), cmap=cmap, interpolation='nearest',
                    aspect='auto', extent=(0,len(rows[0]), 0, len(rows)))
     ax.xaxis.set_ticks([])
-    ax.yaxis.set_ticks([])
+    # label y-axis groups
+    y_ticks = []
+    y_labels = []
+    last_label = ""
+    y_label_list = name
+    if len(set(group)) > 1:
+        y_label_list = group
+    for idx, label in enumerate(y_label_list):
+        if label == last_label:
+            continue
+        last_label = label
+        y_labels.append(label)
+        y_ticks.append(idx + 0.5)
+    ax.yaxis.set_ticks( y_ticks )
+    ax.yaxis.set_ticklabels(y_labels)
     cb = fig.colorbar(im)
     # FIXME: Ticks should probably contain actual values
     # For now, just set to positive/negative
