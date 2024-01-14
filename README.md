@@ -3,17 +3,34 @@ Examples for connecting to the MCG API taken from the API Getting Started manual
 
 (c) Copyright 2023 Premier Heart, LLC
 
+# Contents
+  -[Basic API Connectivity](#basic-api-connectivity) 
+	* [simple_connection.py](#simple_connection_py)
+	* [error_handling.py](#error_handling_py)
+	* [basic_analysis_request.py](#basic_analysis_request_py)
+	* [send_ecg_files.py](#send_ecg_files_py)
+	* [multiple_output_request.py](#multiple_output_request_py)
+	* [tracing_quality_request.py](#tracing_quality_request_py)
+  - [Analysis of API Output](#analysis-of-api-output)
+	* [analyze_result_diagnoses.py](#analyze_result_diagnoses_py)
+	* [analyze_result_transforms.py](#analyze_result_transforms)
+  - [Displaying API Output](#displaying-api-output)
+	* [extract_transform_heatmaps.py](#extract_transform_heatmaps_py)
+	* [transform_heatmap.py](#transform_heatmap_py)
+	* [transform_topo_plot.py](#transform_topo_plot_py)
+	* [generate_pdf_report.py](#generate_pdf_report_py)
+  - [Advanced Analysis Types](#advanced-analysis-types)
+	* [differential_analysis_request.py](#differential_analysis_request_py)
+	* [diagnosis_trace.py](#diagnosis_trace_py)
 
-### Basic API Connectivity
-
-* simple_connection.py - Tests that a connection can be made to the API server
+## Basic API Connectivity
+* <a name="simple_connection_py">simple_connection.py</a> - Tests that a connection can be made to the API server
 ```
 bash# MCG_API_TOKEN_FILE='.token/mcg_api_jwt.dat' python simple_connection.py
 Connecting to unused endpoint. Should print 'ERROR /':
 ERROR /
 ```
-
-* error_handling.py - Demonstrates how to handle various connection errors
+* <a name="error_handling_py">error_handling.py</a> - Demonstrates how to handle various connection errors
 ```
 bash# MCG_API_TOKEN_FILE='.token/mcg_api_jwt.dat' python error_handling.py
 [01] Connecting to invalid server
@@ -39,8 +56,7 @@ bash# MCG_API_TOKEN_FILE='.token/mcg_api_jwt.dat' python error_handling.py
 [11] Connecting with valid token and invalid analysis type
  ... Caught error: Extension not found
 ```    
-
-* basic_analysis_request.py - Demonstrates how to send an AnalysisRequest to the API server. This uses random data for the ECG inputs, which may result in an Error object being returned instead of an AnalysisResult.
+* <a name="basic_analysis_request_py">basic_analysis_request.py</a> - Demonstrates how to send an AnalysisRequest to the API server. This uses random data for the ECG inputs, which may result in an Error object being returned instead of an AnalysisResult.
 ```
 bash# MCG_API_TOKEN_FILE='.token/mcg_api_jwt.dat' python basic_analysis_request.py
 Analysis Results:
@@ -54,8 +70,7 @@ Analysis Results:
 }]'}]
 	warnings: []
 ```
-
-* send_ecg_files.py - Demonstrates how to send ECG JSON files for analysis and display the results.
+* <a name="send_ecg_files_py">send_ecg_files.py</a> - Demonstrates how to send ECG JSON files for analysis and display the results.
 ```
 bash# MCG_API_TOKEN_FILE='.token/mcg_api_jwt.dat' python send_ecg_files.py
 Read input: /home/ph/projects/mcg-api-examples/data/ecg_1.json
@@ -80,7 +95,7 @@ Results Summary:
 	warnings: []
 Attachments:
 ```
-* multiple_output_request.py - Demonstrates how to request multiple output files, which will be included in the AnalysisResults object as attachments.
+* <a name="multiple_output_request_py">multiple_output_request.py</a> - Demonstrates how to request multiple output files, which will be included in the AnalysisResults object as attachments.
 ```
 bash# MCG_API_TOKEN_FILE='.token/mcg_api_jwt.dat' python multiple_output_request.py
 Read input: /home/ph/projects/mcg-api-examples/data/ecg_1.json
@@ -131,7 +146,7 @@ Attachments:
 	[24] transform-heatmap-cps.(V5,II) from transform-heatmap for input '0,1,2' : image/svg+xml (base64-encoded 113602-byte file)
 	[25] report from report-json for input '0,1,2' : application/x-java-object (in-memory JSON object)
 ```
-* tracing_quality_request.py - Demonstrates how to perform an ECG Tracing Quality analysis
+* <a name="tracing_quality_request_py">tracing_quality_request.py</a> - Demonstrates how to perform an ECG Tracing Quality analysis
 ```
 bash# MCG_API_TOKEN_FILE='.token/mcg_api_jwt.dat' python tracing_quality_request.py
 Read input: /home/ph/projects/mcg-api-examples/data/ecg_1.json
@@ -153,10 +168,10 @@ Results Summary:
 	warnings: []
 ```
 
-### Analysis of API Output
+## Analysis of API Output
 These programs take an AnalysisResults JSON file as in put. In the following examples, the automatically-saved output of multiple_output_request.py has been used.
 
-* analyze_result_diagnoses.py - This demonstrates how to load the contents of the Diagnosis Matrix and of **results-json** attachments into a Pandas dataframe. For each dataframe, a summary is printed and a histogram is plotted. Note that the contents of **results-json** are for research purposes only, and should not be interpreted without guidance from Premier Heart staff.
+* <a name="analyze_result_diagnoses_py">analyze_result_diagnoses.py</a> - This demonstrates how to load the contents of the Diagnosis Matrix and of **results-json** attachments into a Pandas dataframe. For each dataframe, a summary is printed and a histogram is plotted. Note that the contents of **results-json** are for research purposes only, and should not be interpreted without guidance from Premier Heart staff.
 ```
 bash# python analyze_result_diagnoses.py data/analysis-results.multiple-outputs.example.json
 DIAGNOSIS MATRIX:
@@ -225,7 +240,7 @@ Example of histogram for Diagnosis Matrix:
 Example of histogram for the Ischemia diagnosis algorithm results:
 ![Ischemia Algorithm histogram](images/ischemia-df-histogram.png?raw=true "Ischemia histogram")
 
-* analyze_result_transforms.py - Demonstrates how to load the contents of **transform-json** into a Pandas dataframe. As an example analysis, the Frequency Response of lead II is calculated. 
+* <a name="analyze_result_transforms">analyze_result_transforms.py</a> - Demonstrates how to load the contents of **transform-json** into a Pandas dataframe. As an example analysis, the Frequency Response of lead II is calculated. 
 ```
 bash# python analyze_result_transforms.py   data/analysis-results.multiple-outputs.example.json
 (aps) auto power spectrum of Signal V5
@@ -259,9 +274,9 @@ max    2.766847  0.0  0.0  0.0  ...  343.360000  19.0  10.000000  0.0
 [8 rows x 128 columns]  
 ```
 
-### Displaying API output
+## Displaying API output
 These programs take an AnalysisResults JSON file as in put. In the following examples, the automatically-saved output of multiple_output_request.py has been used.
-* extract-transform-heatmaps.py - Demonstrates how to extract base64-encoded attachments and write them to a file. This exports the SVG files generated by the  **transform-heatmap** output extension.
+* <a name="extract_transform_heatmaps_py">extract_transform_heatmaps.py</a> - Demonstrates how to extract base64-encoded attachments and write them to a file. This exports the SVG files generated by the  **transform-heatmap** output extension.
 ```
 bash# python extract_transform_heatmaps.py data/analysis-results.multiple-outputs.example.json 
 Writing images/transform-heatmap-amp.V5.svg...
@@ -279,7 +294,7 @@ Done.
 Example heatmap : Coherence
 ![Coherence heatmap](images/coherence-heatmap.svg?raw=true "Coherence heatmap")
 
-* transform_heatmap_output.py - Demonstrates generating the transform heatmaps locally, using matplotlib.
+* <a name="transform_heatmap_py">transform_heatmap_output.py</a> - Demonstrates generating the transform heatmaps locally, using matplotlib.
 ```
 bash# python transform_heatmap_putput.py data/analysis-results.multiple-outputs.example.json 
 Plotting aps.V5. Press Ctrl-w to close.
@@ -296,7 +311,8 @@ Plotting coh.(V5,II). Press Ctrl-w to close.
 Example heatmap : Coherence
 ![Coherence heatmap](images/coherence-heatmap.png?raw=true "Coherence heatmap")
 Note that the colormap in matplotlib differs slighty from that used by the server to generate the SVG. The Matplotlib version is considered more canonical.
-* transform_topo_plot.py
+
+* <a name="transform_topo_plot_py">transform_topo_plot.py</a>
 ```
 bash# python transform_topo_plot.py data/analysis-results.multiple-outputs.example.json 
 Plotting aps.V5. Press Ctrl-w to close.
@@ -313,7 +329,7 @@ Plotting coh.(V5,II). Press Ctrl-w to close.
 Example Topo Plot : Coherence
 ![Coherence topo](images/coherence-topo_plot.png?raw=true "Coherence topo")
 
-* generate_pdf_report.py - Demonstrates generating a simple PDF report from the Diagnosis Matrix and the **report-json** output extension.
+* <a name="generate_pdf_report_py">generate_pdf_report.py</a> - Demonstrates generating a simple PDF report from the Diagnosis Matrix and the **report-json** output extension.
 ```
 bash# python generate_pdf_report.py  data/analysis-results.multiple-outputs.example.json 
 ```
@@ -321,9 +337,10 @@ Example PDF report : First page
 ![PDF Report](images/mcg-pdf-report-page-1.png?raw=true "PDF Report")
 
 
-### Advanced Analysis Types
+## Advanced Analysis Types
 These analyses are considered experimental, and their implementation may change.
-* differential_analysis_request.py - Demonstrates how to request a differential
+
+* <a name="differential_analysis_request_py">differential_analysis_request.py</a> - Demonstrates how to request a differential
 diagnosis analysis (e.g. pre/post-treatment), and plot the results. Note that
 the standard MCG Analysis outputs for transforms and results are available as 
 attachments.
@@ -395,7 +412,7 @@ post||I|X|X|X|-|-|-|+|+|-|+|-|-|-|+|X|X|X|X|-|-|X|-|+|+|+|X|-|X|X|X|-|-|-|-|-|-|
 Example Differential Diagnosis Plot
 ![Differential Diagnosis](images/differential-diagnosis-plot.png?raw=true "Differential Diagnosis")
 
-* diagnosis_trace.py - Shows how to display the tree of a Diagnosis Trace 
+* <a name="diagnosis_trace_py">diagnosis_trace.py</a> - Shows how to display the tree of a Diagnosis Trace 
 output. The Diagnosis Trace is used to determine how a particular result was 
 arrived at by the analysis software. 
 ```
