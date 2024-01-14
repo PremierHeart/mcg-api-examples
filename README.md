@@ -4,7 +4,7 @@ Examples for connecting to the MCG API taken from the API Getting Started manual
 (c) Copyright 2023 Premier Heart, LLC
 
 # Contents
-  -[Basic API Connectivity](#basic-api-connectivity) 
+  - [Basic API Connectivity](#basic-api-connectivity) 
 	* [simple_connection.py](#simple_connection_py)
 	* [error_handling.py](#error_handling_py)
 	* [basic_analysis_request.py](#basic_analysis_request_py)
