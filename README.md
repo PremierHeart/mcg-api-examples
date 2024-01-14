@@ -13,7 +13,7 @@ Examples for connecting to the MCG API taken from the API Getting Started manual
 	* [tracing_quality_request.py](#tracing_quality_request_py)
   - [Analysis of API Output](#analysis-of-api-output)
 	* [analyze_result_diagnoses.py](#analyze_result_diagnoses_py)
-	* [analyze_result_transforms.py](#analyze_result_transforms)
+	* [analyze_result_transforms.py](#analyze_result_transforms_py)
   - [Displaying API Output](#displaying-api-output)
 	* [extract_transform_heatmaps.py](#extract_transform_heatmaps_py)
 	* [transform_heatmap.py](#transform_heatmap_py)
