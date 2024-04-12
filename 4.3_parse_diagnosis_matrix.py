@@ -2,11 +2,8 @@
 # (c) Copyright 2023 Premier Heart, LLC
 
 import json
-import requests
 import os
-import random
 import sys
-from datetime import datetime
 
 def print_diagnosis_matrix(res, delim="\t"):
     if len(res) < 1:
