@@ -1,0 +1,458 @@
+{
+    "object-type": "analysis-result",
+    "locale": "en-US",
+    "encoding": "utf-8",
+    "framework": {
+        "name": "BSIA",
+        "version": "1.0.1",
+        "description": "BioSignal Information Analysis framework",
+        "notice": "Experimental software: NOT FOR CLINICAL USE. (c) Copyright 2022 Premier Heart, LLC"
+    },
+    "id": "MCGS/5284",
+    "results": {
+        "source": "mcg-avg",
+        "sample": "2",
+        "category": "N/A",
+        "positive": {
+            "Impression": 5.0,
+            "Disease Severity": 6.5,
+            "Disease Severity Adjusted Score": 8.0,
+            "Ventricular Hypertrophy": 1.0,
+            "Left Ventricular Hypertrophy": 1.0,
+            "Rheumatic HD": 1.0,
+            "Congenital HD": 1.0,
+            "Myocardial Infarct": 1.0,
+            "Myocarditis": 1.0,
+            "Myocardial Remodelling": 1.0,
+            "Increased Myocardial Compliance": 1.0
+        },
+        "negative": {
+            "Ischemic Disease Severity": 0.0,
+            "Biventricular Hypertrophy": 0.0,
+            "Right Ventricular Hypertrophy": 0.0,
+            "Ischemia": 0.0,
+            "Pulmonary HD": 0.0,
+            "Cardio Myopathy": 0.0,
+            "Ejection Fraction": 0.0,
+            "Decreased Myocardial Compliance": 0.0,
+            "Fibrillation": 0.0,
+            "Atrial Fibrillation": 0.0,
+            "Ventricular Fibrillation": 0.0,
+            "Potential Fibrillation": 0.0,
+            "Ventricular Arrhythmia": 0.0,
+            "Incipient Arrhythmia": 0.0,
+            "Local Asynchrony": 0.0,
+            "Power Failure": 0.0,
+            "Global Ischemia": 0.0,
+            "Local Ischemia": 0.0,
+            "Global Ischemia (borderline)": 0.0,
+            "Local Ischemia (borderline)": 0.0
+        },
+        "representative": {
+            "Impression (text)": "Abnormal",
+            "Ischemia": "",
+            "Disease Severity": 6.5,
+            "Ischemic Disease Severity": 0.0,
+            "Disease Severity Adjusted Score": 8.0,
+            "Local Ischemia": 0.0,
+            "Local Ischemia (borderline)": 0.0,
+            "Global Ischemia": 0.0,
+            "Global Ischemia (borderline)": 0.0,
+            "Myocardial Infarct": 1.0,
+            "Ventricular Hypertrophy": 1.0,
+            "Biventricular Hypertrophy": 0.0,
+            "Left Ventricular Hypertrophy": 1.0,
+            "Right Ventricular Hypertrophy": 0.0,
+            "Cardio Myopathy": 0.0,
+            "Pulmonary HD": 0.0,
+            "Congenital HD": 1.0,
+            "Rheumatic HD": 1.0,
+            "Myocarditis": 1.0,
+            "Potential Fibrillation": 0.0,
+            "Atrial Fibrillation": 0.0,
+            "Ventricular Fibrillation": 0.0,
+            "Ventricular Arrhythmia": 0.0,
+            "Incipient Arrhythmia": 0.0,
+            "Fibrillation": 0.0,
+            "Myocardial Remodelling": 1.0,
+            "Ejection Fraction": 0.0,
+            "Bradycardia": 0.0,
+            "Tachycardia": 0.0,
+            "Power Failure": 0.0,
+            "Decreased Myocardial Compliance": 0.0,
+            "Increased Myocardial Compliance": 1.0,
+            "Signal B lags behind signal A (global)": 1.0,
+            "Signal A lags behind signal B (global)": 0.0,
+            "Global Asynchrony": 1.0,
+            "Signal B lags behind signal A (local)": 0.0,
+            "Signal A lags behind signal B (local)": 0.0,
+            "Local Asynchrony": 0.0
+        },
+        "aggregate": {
+            "Ventricular Hypertrophy": 1.0,
+            "Biventricular Hypertrophy": 0.0,
+            "Left Ventricular Hypertrophy": 1.0,
+            "Right Ventricular Hypertrophy": 0.0,
+            "Ischemia": 0.0,
+            "Rheumatic HD": 1.0,
+            "Congenital HD": 1.0,
+            "Myocardial Infarct": 1.0,
+            "Myocarditis": 1.0,
+            "Pulmonary HD": 0.0,
+            "Cardio Myopathy": 0.0,
+            "Ejection Fraction": 0.0,
+            "Myocardial Remodelling": 1.0,
+            "Decreased Myocardial Compliance": 0.0,
+            "Increased Myocardial Compliance": 1.0,
+            "Fibrillation": 0.0,
+            "Atrial Fibrillation": 0.0,
+            "Ventricular Fibrillation": 0.0,
+            "Potential Fibrillation": 0.0,
+            "Ventricular Arrhythmia": 0.0,
+            "Incipient Arrhythmia": 0.0,
+            "Local Asynchrony": 0.0,
+            "Power Failure": 0.0,
+            "Impression": 5.0,
+            "Impression (text)": "Abnormal",
+            "Abnormal": 4.0,
+            "Borderline (arrhythmia)": 0.0,
+            "Borderline (autonomic)": 5.0,
+            "Raw Disease Severity": 0.0,
+            "Secondary Score": 0.0,
+            "Impression Severity": 0.0,
+            "Has CIM": 1.0,
+            "Global Ischemia": 0.0,
+            "Local Ischemia": 1.0,
+            "Global Ischemia (borderline)": 0.0,
+            "Local Ischemia (borderline)": 0.0,
+            "Ischemia (text)": "CAD",
+            "Disease Severity": 6.5,
+            "Ischemic Disease Severity": 6.5,
+            "Disease Severity EWHR Score": 5.0,
+            "Disease Severity Adjusted Score": 8.0
+        },
+        "range": {
+            "Impression": {
+                "mean": 5.0,
+                "min": 5,
+                "max": 5,
+                "first": 5,
+                "last": 5
+            },
+            "Disease Severity": {
+                "mean": 6.5,
+                "min": 6.5,
+                "max": 6.5,
+                "first": 6.5,
+                "last": 6.5
+            },
+            "Ischemic Disease Severity": {
+                "mean": 0.0,
+                "min": 0.0,
+                "max": 0.0,
+                "first": 0.0,
+                "last": 0.0
+            },
+            "Disease Severity Adjusted Score": {
+                "mean": 8.0,
+                "min": 8.0,
+                "max": 8.0,
+                "first": 8.0,
+                "last": 8.0
+            },
+            "Ventricular Hypertrophy": {
+                "mean": 1.0
+            },
+            "Biventricular Hypertrophy": {
+                "mean": 0.0
+            },
+            "Left Ventricular Hypertrophy": {
+                "mean": 1.0
+            },
+            "Right Ventricular Hypertrophy": {
+                "mean": 0.0
+            },
+            "Ischemia": {
+                "mean": 0.0
+            },
+            "Rheumatic HD": {
+                "mean": 1.0
+            },
+            "Congenital HD": {
+                "mean": 1.0
+            },
+            "Myocardial Infarct": {
+                "mean": 1.0
+            },
+            "Myocarditis": {
+                "mean": 1.0
+            },
+            "Pulmonary HD": {
+                "mean": 0.0
+            },
+            "Cardio Myopathy": {
+                "mean": 0.0
+            },
+            "Ejection Fraction": {
+                "mean": 0.0
+            },
+            "Myocardial Remodelling": {
+                "mean": 1.0
+            },
+            "Decreased Myocardial Compliance": {
+                "mean": 0.0
+            },
+            "Increased Myocardial Compliance": {
+                "mean": 1.0
+            },
+            "Fibrillation": {
+                "mean": 0.0
+            },
+            "Atrial Fibrillation": {
+                "mean": 0.0
+            },
+            "Ventricular Fibrillation": {
+                "mean": 0.0
+            },
+            "Potential Fibrillation": {
+                "mean": 0.0
+            },
+            "Ventricular Arrhythmia": {
+                "mean": 0.0
+            },
+            "Incipient Arrhythmia": {
+                "mean": 0.0
+            },
+            "Local Asynchrony": {
+                "mean": 0.0
+            },
+            "Power Failure": {
+                "mean": 0.0
+            },
+            "Global Ischemia": {
+                "mean": 0.0
+            },
+            "Local Ischemia": {
+                "mean": 0.0
+            },
+            "Global Ischemia (borderline)": {
+                "mean": 0.0
+            },
+            "Local Ischemia (borderline)": {
+                "mean": 0.0
+            }
+        },
+        "tracing-quality": {
+            "0": 90,
+            "1": 90,
+            "2": 90
+        },
+        "diagnosis-matrix": {
+            "id": [
+                "0",
+                "1",
+                "2"
+            ],
+            "Impression (text)": [
+                "Abnormal",
+                "Abnormal",
+                "Abnormal"
+            ],
+            "Ischemia": [
+                "N/A",
+                "N/A",
+                "N/A"
+            ],
+            "Disease Severity": [
+                6.5,
+                6.5,
+                6.5
+            ],
+            "Ischemic Disease Severity": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Disease Severity Adjusted Score": [
+                8.0,
+                8.0,
+                8.0
+            ],
+            "Local Ischemia": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Local Ischemia (borderline)": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Global Ischemia": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Global Ischemia (borderline)": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Myocardial Infarct": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Ventricular Hypertrophy": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Biventricular Hypertrophy": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Left Ventricular Hypertrophy": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Right Ventricular Hypertrophy": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Cardio Myopathy": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Pulmonary HD": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Congenital HD": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Rheumatic HD": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Myocarditis": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Potential Fibrillation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Atrial Fibrillation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Ventricular Fibrillation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Ventricular Arrhythmia": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Incipient Arrhythmia": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Fibrillation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Myocardial Remodelling": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Ejection Fraction": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Bradycardia": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Tachycardia": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Power Failure": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Decreased Myocardial Compliance": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Increased Myocardial Compliance": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Signal B lags behind signal A (global)": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Signal A lags behind signal B (global)": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Global Asynchrony": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Signal B lags behind signal A (local)": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Signal A lags behind signal B (local)": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Local Asynchrony": [
+                0.0,
+                0.0,
+                0.0
+            ]
+        },
+        "comment": "(FAKE DATA) Generated by analysis_request_for_ecg_files.py",
+        "invoice-id": "2024-03-15-67546790-mcg",
+        "billing-info": {
+            "patient": "295326",
+            "group no": "10-90-1198-NF",
+            "policy": "1111-323-84889-X",
+            "technician": "A. Intern"
+        }
+    },
+    "attachments": [],
+    "warnings": []
+}
