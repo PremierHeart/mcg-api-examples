@@ -17,7 +17,13 @@ def retrieve_attachment(att):
     # otherwise, att['data'] is inline-json and is already unpacked
     return data
 
-def impression_label(score):
+def get_impression(summary):
+    score = 0
+    if 'Impression' in summary['positive']:
+        score = summary['positive']['Impression']
+    elif 'Impression' in summary['negative']:
+        score = summary['negative']['Impression']
+
     if score <= 1:
         return "Normal"
     elif score > 4:
@@ -25,23 +31,13 @@ def impression_label(score):
     else:
         return "Borderline"
 
-def print_report_attachment(summary, att):
-    imp_score = 0
-    if 'Impression' in summary['positive']:
-        imp_score = summary['positive']['Impression']
-    elif 'Impression' in summary['negative']:
-        imp_score = summary['negative']['Impression']
-    print("Impression: %s" % impression_label(imp_score))
+def get_mcg_category(summary):
     cat = str(summary['category'])
     if cat == 'N/A':
         cat = "0"
-    print("Category: %s" % cat)
-    severity = "N/A"
-    if 'Ischemic Disease Severity' in summary['positive']:
-        severity = str(summary['positive']['Ischemic Disease Severity'])
-    print("Severity: %s" % severity)
-    #fill_ischemia_line(doc, summary)
-    # ischemia
+    return cat
+
+def get_ischemia(summary):
     ischemia = "None detected"
     if 'Global Ischemia' in summary['positive']:
         ischemia = "Global Ischemia detected"
@@ -51,34 +47,47 @@ def print_report_attachment(summary, att):
         ischemia = "Borderline Global Ischemia detected"
     elif 'Local Ischemia (borderline)' in summary['positive']:
         ischemia = "Borderline Local Ischemia detected"
-    print("Ischemia: %s" % ischemia)
-    # 2-ry/3-ary
+    return ischemia
+
+def print_primary_results(summary):
+    print("Primary results")
+    print("\tImpression: %s" % get_impression(summary))
+    print("\tCategory: %s" % get_mcg_category(summary))
+
+    severity = "N/A"
+    if 'Ischemic Disease Severity' in summary['positive']:
+        severity = str(summary['positive']['Ischemic Disease Severity'])
+    print("\tSeverity: %s" % severity)
+    print("Ischemia: %s" % get_ischemia(summary))
+
     print("Positive Diagnoses:")
     for name in sorted(list(summary['positive'].keys())):
         score = summary['positive'][name]
         print("\t%s (%0.1f)" % (name, score))
+
     print("Negative Diagnoses:")
     for name in sorted(list(summary['negative'].keys())):
         print("\t%s" % name)
-    #
+
+def print_report_attachment(summary, att):
+    print_primary_results(summary)
+
+    print("Supporting results:")
     data = retrieve_attachment(att)
-    # data is a list of per-input resultd
+    # report-json attachment data is a list of per-input results
     for rec in data:
-        print(rec.keys())
-        print("[%d] %s %s" % (rec['index'], rec['input'], rec['timestamp']))
-        print("Diagnoses:")
+        print("\t[%d] \"%s\" %s" % (rec['index'], rec['input'], rec['timestamp']))
+        print("\t[%d] Diagnoses:" % rec['index'])
         for name, h in rec['results'].items():
             if isinstance(h, dict):
                 pos = '+' if h['positive'] else '-'
-                print("\t[%s] %s : %s" % (pos, name, str(h['value'])))
+                print("\t\t[%s] %s : %s" % (pos, name, str(h['value'])))
             else:
-                print("\t%s : %s" % (name, str(h)))
-        print("Transforms:")
+                print("\t\t%s : %s" % (name, str(h)))
+        print("\t[%d] Transforms:" % rec['index'])
         for name, arr in rec['transforms'].items():
-            print("%s : %d" % (name, len(arr)))
+            print("\t\t%s : %d" % (name, len(arr)))
 
-    #summary = res['results']
-    #fill_primary_results(doc, summary)
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
