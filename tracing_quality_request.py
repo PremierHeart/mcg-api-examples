@@ -89,8 +89,11 @@ if __name__ == '__main__':
             inputs.append(input_for_ecg_json(f.read()))
         print("Read input: %s" % (fname))
 
-    token = get_api_token()
     data = build_request( inputs )
+    with open("data/analysis-request.ecg-files.tracing-quality.json", 'w') as f:
+        f.write(json.dumps(data))
+
+    token = get_api_token()
     resp = send_api_request(url, token, data)
     results = decode_response(resp)
 
