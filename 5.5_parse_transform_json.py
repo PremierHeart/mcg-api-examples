@@ -5,8 +5,6 @@ import sys
 import json
 import base64
 from datetime import datetime
-import numpy as np
-import pandas
 
 def retrieve_attachment(att):
     # retrieve data for attachment
@@ -23,29 +21,16 @@ def retrieve_attachment(att):
 def parse_transform_attachment(att):
     data = retrieve_attachment(att)
     ts = datetime.utcfromtimestamp(data['timestamp']).strftime('%Y-%m-%d %H:%M:%S')
+    print("\"%s\" %s" % (att['input'], ts))
     xforms = list(set(data.keys()) - set(['timestamp', 'json-schema', 'json_class']))
     xforms.sort()
-    xform_keys = None
-    h = { }
     for sym in xforms:
         xform = data[sym]
-        if not xform_keys:
-            xform_keys = list(xform.keys())
-            xform_keys.remove("data")
-
-        metadata = {}
-        for key in xform_keys:
-            metadata[key] = xform[key]
-        metadata["timestamp"] = ts
-        h[sym] = [metadata, xform["data"]]
-    return h
-
-def describe_dsp_dataframe(df, descr):
-    print("(%s) %s of %s %s" % (descr['sym'], descr['name'], descr['source_type'], descr['source']))
-    print("      %s domain: %s" % (descr['domain'], descr['label']))
-    print(df.describe(include='all'))
-    print()
-
+        print("\t[%s] %s of %s %s" % (sym, xform['name'], xform['source_type'], xform['source']))
+        print("\t\tDomain: %s" % xform['domain'])
+        print("\t\tPlot Title: %s" % xform['label'])
+        print("\t\t     X-axis: %s" % xform['x_label'])
+        print("\t\t     Y-axis: %s" % xform['y_label'])
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
@@ -54,30 +39,6 @@ if __name__ == '__main__':
     with open(sys.argv[1]) as f:
         res = json.loads(f.read())
 
-    dsp_data = { }
-    dsp_metadata = { }
-    dsp_row_names = []
     for idx, att in enumerate(res['attachments']):
         if att['output'] == 'transform-json' and att['name'] == 'transform-sample':
-            dsp_row_names.append(att['input'])
-            dsp_h = parse_transform_attachment(att)
-            for sym, xform_data in dsp_h.items():
-                metadata = xform_data[0]
-                data = xform_data[1]
-                if sym not in dsp_data:
-                    dsp_data[sym] = []
-                dsp_data[sym].append( np.array(data) )
-                if sym not in dsp_metadata:
-                    dsp_metadata[sym] = []
-                    dsp_metadata[sym] = metadata
-
-    dsp_dataset = {}
-    for sym, data in dsp_data.items():
-        # generate pandas dataset
-        dsp_dataset[sym] = pandas.DataFrame(data=np.matrix(data), index=dsp_row_names)
-
-    # print descriptive statistics for each transform
-    for k, df in dsp_dataset.items():
-        describe_dsp_dataframe(df, dsp_metadata[k])
-
-
+            parse_transform_attachment(att)
