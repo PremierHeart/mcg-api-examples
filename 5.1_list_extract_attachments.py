@@ -28,7 +28,7 @@ def write_attachment_to_disk(att):
         mode = "w"
 
     # NOTE: This does not determine filename extension
-    fname = + att['name'] + '.dat'
+    fname = "%s.%s.%s.dat" % (att['name'], att['input'], att['group'])
     print("Writing " + fname + '...')
     with open(fname, mode) as f: 
         f.write(output_data)
