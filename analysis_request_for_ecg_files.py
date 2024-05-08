@@ -10,6 +10,17 @@ from datetime import datetime
 def build_request(inputs):
     return {
       "object-type": "analysis-request",
+      #"analysis": {
+      #  "type": "ecg-phase",
+      #  "options": {},
+      #},
+      #"output": { 
+      #    "signal-phase-portrait": {
+      #    },
+      #    "transform-json": {
+      #      'in-place-json': True
+      #  }
+      #},
       "analysis": {
         "type": "mcg-aggregate",
         "options": {
