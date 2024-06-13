@@ -98,6 +98,25 @@ def get_report_data(res):
                     dsp[name][ident] = arr
     return { 'final': final, 'results': diags, 'transforms': dsp }
 
+def display_report_data(rpt):
+    print("MCG Analysis Results")
+    print("--------------------")
+    for name, val in rpt['final'].items():
+        score = "-"
+        if val != False:
+            score = "+ (" + str(val) + ")"
+        print("    %s: %s" % (name, score))
+
+    print("Per-Sample Results")
+    print("------------------")
+    for name, h in rpt['results'].items():
+        print("    %s: %s" % (name, ", ".join(h.values())))
+
+    print("Per-Sample Plots")
+    print("----------------")
+    for name, h in rpt['transforms'].items():
+        print("    PLOT %s FOR %s" % (name, ", ".join(h.keys())))
+
 if __name__ == '__main__':
     url = "https://api.premierheart.com/api/v1/analyze"
     if len(sys.argv) > 1:
@@ -108,7 +127,7 @@ if __name__ == '__main__':
         fname = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', ("ecg_%d.json" % (x+1)))
         with open(fname, 'r') as f:
             ident = os.path.basename(fname)
-            inputs.append(input_for_ecg_json(f.read()), ident)
+            inputs.append(input_for_ecg_json(f.read(), ident))
         print("Read input: %s" % (fname))
 
     token = get_api_token()
@@ -122,5 +141,5 @@ if __name__ == '__main__':
             print("\t%s: %s" % (k, v))
         sys.exit()
 
-    rpt =  get_report_data(res)
+    rpt =  get_report_data(results)
     display_report_data(rpt)
